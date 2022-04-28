@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/night_office">
+
+    <TextView
+        android:id="@+id/appheader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose listId"
+        android:textColor="@color/white"
+        android:textSize="100px"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.13"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07999998" />
+
+<!--    this is my scrollbar on my landing page-->
+
+    <!--    here is where I want my data to show up-->
+    <ListView
+        android:id="@+id/thisIsMyList"
+        android:layout_width="325dp"
+        android:layout_height="500dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="100dp"
+
+        android:background="#D9424242"
+        android:textSize="30sp"
+        android:textStyle="bold"
+
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appheader" />
+
+</RelativeLayout>
