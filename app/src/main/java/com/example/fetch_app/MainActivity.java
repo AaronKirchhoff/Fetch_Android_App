@@ -5,15 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
+
+//import com.android.volley.Request;
+//import com.android.volley.RequestQueue;
+//import com.android.volley.Response;
+//import com.android.volley.VolleyError;
+//import com.android.volley.toolbox.StringRequest;
+//import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
-//import android.widget.ArrayAdapter;import android.widget.ListView;
+import android.widget.ArrayAdapter;import android.widget.ListView;
 
 
 public class MainActivity extends AppCompatActivity {
 
 
     ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,22 +38,29 @@ public class MainActivity extends AppCompatActivity {
 //        5. display in listview only one group id, sorted
 //        6. figure out how to make the listview conditional on which groupID you want to see
 
+//        STATIC ******* this is the string array that's static for testing listview
         ArrayList<String> arrayList=new ArrayList<>();
-
-        arrayList.add("my");
-        arrayList.add("name");
+        arrayList.add("Jim");
+        arrayList.add("Holden");
         arrayList.add("is");
-        arrayList.add("earl");
         arrayList.add("my");
-        arrayList.add("name");
-        arrayList.add("is");
-        arrayList.add("earl");
-        arrayList.add("my");
+        arrayList.add("hero");
 
-//customrow is the custom default edits for how i want my text in the listview to show up, and it works, must restart emulator for it to show
+        // this is the drop down string array, thats static for testing spinner
+        String[] arraySpinner = new String[] {
+                "GroupId1", "GroupId2", "GroupId3", "GroupId4",
+        };
+
+//        this is my drop down menu code
+        Spinner s = (Spinner) findViewById(R.id.mymenuSpinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, arraySpinner);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        s.setAdapter(adapter);
+
+// this is the listview scroll bar code
+//        STATIC***** arrayList is the string array i built above and am passing into my arrayadapter. ok, it knows to loop through it and display all info. i imagine the arrayadapter instance will need to be conditional.
         ArrayAdapter arrayAdapter=new ArrayAdapter(this,R.layout.customrow,arrayList);
-
         listView.setAdapter(arrayAdapter);
-
     }
 }
