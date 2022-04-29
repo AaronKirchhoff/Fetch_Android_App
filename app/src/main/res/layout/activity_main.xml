@@ -7,36 +7,25 @@
     tools:context=".MainActivity"
     android:background="@drawable/night_office">
 
-    <TextView
-        android:id="@+id/appheader"
-        android:layout_width="240dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="30dp"
-        android:text="Choose listId"
-        android:textColor="@color/white"
-        android:textSize="100px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.13"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/thisIsMyList"
-        app:layout_constraintVertical_bias="0.07999998" />
+    <Button
+        android:id="@+id/get_byListId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/thisIsMyList"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginEnd="40dp"
+        android:text="Choose listId" />
 
-<!--    this is my scrollbar on my landing page-->
-
-    <!--    here is where I want my data to show up-->
     <ListView
         android:id="@+id/thisIsMyList"
         android:layout_width="325dp"
         android:layout_height="500dp"
         android:layout_marginStart="45dp"
         android:layout_marginTop="100dp"
-
-        android:background="#D9424242"
+        android:background="#A6FFFFFF"
         android:textSize="30sp"
         android:textStyle="bold"
-
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,23 +33,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appheader" />
 
-    <Spinner
-        android:id="@+id/mymenuSpinner"
+    <EditText
+        android:id="@+id/myEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="50dp"
-
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="40dp"
-        android:layout_toEndOf="@+id/appheader"
-        android:background="@color/design_default_color_primary"
-        app:layout_constraintBottom_toBottomOf="@id/thisIsMyList"
-        app:layout_constraintLeft_toLeftOf="@id/appheader"
-        app:layout_constraintRight_toRightOf="@id/thisIsMyList"
-        app:layout_constraintTop_toTopOf="parent"
-
-        />
+        android:layout_marginLeft="50dp"
+        android:background="@color/teal_700"
+        app:layout_constraintBottom_toBottomOf="@id/get_byListId"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </RelativeLayout>
