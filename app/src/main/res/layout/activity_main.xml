@@ -12,10 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/thisIsMyList"
-        android:layout_marginTop="50dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="40dp"
-        android:text="Choose listId" />
+        android:text="Click to Group by ListId" />
 
     <ListView
         android:id="@+id/thisIsMyList"
@@ -23,7 +23,7 @@
         android:layout_height="500dp"
         android:layout_marginStart="45dp"
         android:layout_marginTop="100dp"
-        android:background="#A6FFFFFF"
+        android:background="#CCFFFFFF"
         android:textSize="30sp"
         android:textStyle="bold"
         android:visibility="visible"

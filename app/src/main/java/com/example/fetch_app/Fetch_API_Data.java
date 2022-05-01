@@ -27,8 +27,6 @@ import java.util.List;
 public class Fetch_API_Data {
 
     public static final String COM_HIRING_JSON = "https://fetch-hiring.s3.amazonaws.com/hiring.json";
-    String cityId;
-    EditText myEditText;
 
     Context context;
 
@@ -37,45 +35,13 @@ public class Fetch_API_Data {
     }
 
     //    part of callback with volley
-    public interface VolleyResponseListener {
-        void onError(String message);
-
-        void onResponse(String cityId);
-    }
-
-    //    define types of methods this class will provide, getCityId will give a toast of index id value, getArrayIndexById is a model from object values
-    public void getCityId(String cityName, VolleyResponseListener volleyResponseListener) {
-        String url = COM_HIRING_JSON;
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                cityId = "";
-                try {
-                    JSONObject city_info = response.getJSONObject(Integer.parseInt(cityName));
-                    cityId = city_info.getString("id");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                volleyResponseListener.onResponse(cityId);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "error uh oh", Toast.LENGTH_SHORT).show();
-                volleyResponseListener.onError("uh oh something wrong");
-            }
-        });
-        MySingleton.getInstance(context).addToRequestQueue(request);
-    }
-
-
-    //    new code for creating model and showing full index information
     public interface VolleyResponseListener2 {
         void onError(String message);
 
 //        callback is a list of models
         void onResponse(List<FetchDataModel> fetchAppList);
     }
+    //    define types of methods this class will provide, getCityId will give a toast of index id value, getArrayIndexById is a model from object values
     public void getArrayIndexById(String thisid, VolleyResponseListener2 volleyResponseListener2) {
         List<FetchDataModel> fetchAppList = new ArrayList<>();
 
@@ -84,7 +50,7 @@ public class Fetch_API_Data {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(JSONArray response) {
-                Toast.makeText(context, "user input: " + thisid, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "You chose listId: " + thisid, Toast.LENGTH_SHORT).show();
 
                 for (int i = 0; i < response.length(); i++) {
                     try {

@@ -37,14 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        arrayList is the name of my new array here, but now need to fetch api and show info
-//        1. fetch list api and show all data
-//        2. sort list by group ID
-//        3 then within each group, each name must be sorted
-//        4. ignore or filter out where name is blank or null
-//        5. display in listview only one group id, sorted
-//        6. figure out how to make the listview conditional on which groupID you want to see
-
 //        assign class member variables to a value
         btn_get_byTheID = findViewById(R.id.get_byListId);
         thisIsMyList = findViewById(R.id.thisIsMyList);
@@ -55,18 +47,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                new class instance,
-//                ******************* old code, please keep for now
                 Fetch_API_Data fetch_api_data = new Fetch_API_Data(MainActivity.this);
-//                fetch_api_data.getCityId(myEditText.getText().toString(), new Fetch_API_Data.VolleyResponseListener() {
-//                    @Override
-//                    public void onError(String message) {
-//                        Toast.makeText(MainActivity.this, "Something wrong here", Toast.LENGTH_SHORT).show();
-//                    }
-//                    @Override
-//                    public void onResponse(String cityId) {
-//                        Toast.makeText(MainActivity.this, "hey this works! " + cityId, Toast.LENGTH_SHORT).show();
-//                        ************************************************
-//                myEditText.getText().toString()
+
                 fetch_api_data.getArrayIndexById(myEditText.getText().toString(), new Fetch_API_Data.VolleyResponseListener2() {
                     @Override
                     public void onError(String message) {
@@ -76,15 +58,12 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(List<FetchDataModel> fetchDataModelList) {
-//                        Toast.makeText(MainActivity.this, fetchDataModelList.toString(), Toast.LENGTH_SHORT).show();
-//                        time to put things into put listview
+//                        time to put things into our listview
                         ArrayAdapter arrayAdapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, fetchDataModelList);
                         thisIsMyList.setAdapter(arrayAdapter);
 
                     }
                 });
-//                    }
-//                });
             }
         });
     }
