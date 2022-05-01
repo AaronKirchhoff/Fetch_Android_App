@@ -1,8 +1,11 @@
 package com.example.fetch_app;
 
 import android.content.Context;
+import android.os.Build;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -15,6 +18,9 @@ import org.json.JSONObject;
 
 import java.text.BreakIterator;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -45,13 +51,11 @@ public class Fetch_API_Data {
             public void onResponse(JSONArray response) {
                 cityId = "";
                 try {
-//                    Integer.parseInt(myEditText.getText().toString()
                     JSONObject city_info = response.getJSONObject(Integer.parseInt(cityName));
                     cityId = city_info.getString("id");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-//                Toast.makeText(context, "Fetch id is " + cityId, Toast.LENGTH_SHORT).show();
                 volleyResponseListener.onResponse(cityId);
             }
         }, new Response.ErrorListener() {
@@ -62,7 +66,6 @@ public class Fetch_API_Data {
             }
         });
         MySingleton.getInstance(context).addToRequestQueue(request);
-//    return cityId;
     }
 
 
@@ -76,51 +79,40 @@ public class Fetch_API_Data {
     public void getArrayIndexById(String thisid, VolleyResponseListener2 volleyResponseListener2) {
         List<FetchDataModel> fetchAppList = new ArrayList<>();
 
-//        first need to get JSONArray from api
         String url = COM_HIRING_JSON;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(JSONArray response) {
-//                int justThisIndex = response.getInt(id);
-//                Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
-
-//                create a list of JSONobject so we dont print whole array, just the part we want
-//                try {
-//                    int consolidated_fetchapp_data = response.getInt();
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                to get first item in array... create empty constructor in model
+                Toast.makeText(context, "user input: " + thisid, Toast.LENGTH_SHORT).show();
 
                 for (int i = 0; i < response.length(); i++) {
-//code for filtering through array and displaying list based on user input goes here
                     try {
                         FetchDataModel dataModel = new FetchDataModel();
-
                         JSONObject justOneIndexFetchAPI = (JSONObject) response.get(i);
-                        dataModel.setId(justOneIndexFetchAPI.getInt("id"));
-                        dataModel.setListId(justOneIndexFetchAPI.getInt("listId"));
-                        dataModel.setName(justOneIndexFetchAPI.getString("name"));
-                        fetchAppList.add(dataModel);
+                        if(thisid.equals("" + justOneIndexFetchAPI.getInt("listId")) && !"".equals(justOneIndexFetchAPI.getString("name")) && !"null".equals(justOneIndexFetchAPI.getString("name"))) {
+                                dataModel.setId(justOneIndexFetchAPI.getInt("id"));
+                                dataModel.setListId(justOneIndexFetchAPI.getInt("listId"));
+                                dataModel.setName(justOneIndexFetchAPI.getString("name"));
+                                fetchAppList.add(dataModel);
+//                                sorting here using Comparable in FetchDataModel, must pass argument, and @override method sorts by id, which is the same as name
+                            Collections.sort(fetchAppList);
 
-                        volleyResponseListener2.onResponse(fetchAppList);
+                            volleyResponseListener2.onResponse(fetchAppList);
+                        }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
             }
-//        assign each property in array to our model
 
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "spaghetti", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, thisid, Toast.LENGTH_SHORT).show();
             }
         });
         MySingleton.getInstance(context).addToRequestQueue(request);
-
-
-
     }
 }

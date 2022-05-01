@@ -1,6 +1,7 @@
 package com.example.fetch_app;
 
-public class FetchDataModel {
+
+public class FetchDataModel implements Comparable<FetchDataModel> {
 
 
 
@@ -46,5 +47,12 @@ public class FetchDataModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public int compareTo(FetchDataModel comparestu) {
+        int compareID= comparestu.getId();
+        /* For Ascending order*/
+        return this.id-compareID;
     }
 }
